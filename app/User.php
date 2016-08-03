@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the petitions created by this user.
+     */
+    public function petitions()
+    {
+        return $this->hasMany('App\Petition');
+    }
 }

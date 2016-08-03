@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'PetitionController@index');
+Route::get('{user}/petitions', 'PetitionController@userIndex');
+
+Route::resource('petition', 'PetitionController', ['except' => [
+    'index'
+]]);

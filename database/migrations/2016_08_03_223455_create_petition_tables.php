@@ -18,6 +18,7 @@ class CreatePetitionTables extends Migration
             $table->string('title');
             $table->string('summary');
             $table->string('body');
+            $table->boolean('private');
             $table->string('thankyou_title');
             $table->string('thankyou_body');
             $table->string('thankyou_email_subject');
