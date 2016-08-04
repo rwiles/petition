@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Petition;
 use App\User;
+use Auth;
 
 class PetitionController extends Controller
 {
@@ -49,7 +50,9 @@ class PetitionController extends Controller
      */
     public function create()
     {
-        return view('petition.create');
+        return view('petition.create', [
+            'petition' => new Petition
+        ]);
     }
 
     /**
@@ -86,7 +89,7 @@ class PetitionController extends Controller
     {
         $petition = Petition::findOrFail($id);
 
-        if (!$petition->private || $petition->user_id == Auth::user()->id) {
+        if (!$petition->private || (Auth::user() && $petition->user_id == Auth::user()->id)) {
             return view('petition.view', [
                 'petition' => $petition
             ]);
@@ -104,7 +107,16 @@ class PetitionController extends Controller
      */
     public function edit($id)
     {
-        //
+      $petition = Petition::findOrFail($id);
+
+      if (Auth::user() && $petition->user_id == Auth::user()->id) {
+          return view('petition.create', [
+              'petition' => $petition
+          ]);
+      }
+      else {
+          App::abort(404);
+      }
     }
 
     /**
@@ -116,7 +128,21 @@ class PetitionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+          'title' => 'required',
+          'summary' => 'required',
+          'body' => 'required'
+      ]);
+
+      $petition = Petition::findOrFail($id);
+
+      $petition->update([
+          'title' => $request->title,
+          'summary' => $request->summary,
+          'body' => $request->body
+      ]);
+
+      return redirect('/petition/'.$petition->id);
     }
 
     /**

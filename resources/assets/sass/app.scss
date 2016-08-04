@@ -1,2 +1,21 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.panel.panel-tabs {
+		.panel-heading {
+				padding: 5px 5px 0 5px;
+		}
+		.nav-tabs {
+				border-bottom: none;
+		}
+}
 
+.section-title {
+		margin-top: 0;
+}
+
+.details {
+		font-size: 12px;
+		font-style: italic;
+}
+
+.btn .fa {
+		padding-right: 5px;
+}
