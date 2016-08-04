@@ -16,6 +16,4 @@ Route::auth();
 Route::get('/', 'PetitionController@index');
 Route::get('{user}/petitions', 'PetitionController@userIndex');
 
-Route::resource('petition', 'PetitionController', ['except' => [
-    'index'
-]]);
+Route::resource('petition', 'PetitionController');

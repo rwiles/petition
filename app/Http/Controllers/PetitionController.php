@@ -49,7 +49,7 @@ class PetitionController extends Controller
      */
     public function create()
     {
-        //
+        return view('petition.create');
     }
 
     /**
@@ -60,7 +60,19 @@ class PetitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'summary' => 'required',
+            'body' => 'required'
+        ]);
+
+        $petition = Petition::create([
+            'title' => $request->title,
+            'summary' => $request->summary,
+            'body' => $request->body
+        ]);
+
+        return redirect('/petition/'.$petition->id);
     }
 
 
@@ -72,7 +84,16 @@ class PetitionController extends Controller
      */
     public function show($id)
     {
-        //
+        $petition = Petition::findOrFail($id);
+
+        if (!$petition->private || $petition->user_id == Auth::user()->id) {
+            return view('petition.view', [
+                'petition' => $petition
+            ]);
+        }
+        else {
+            App::abort(404);
+        }
     }
 
     /**

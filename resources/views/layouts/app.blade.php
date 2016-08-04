@@ -48,7 +48,8 @@
                 <!-- Left Side Of Navbar -->
                 @unless (Auth::guest())
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url(Auth::user()->id.'/petitions') }}">Petitions</a></li>
+                        <li><a href="{{ url(Auth::user()->id.'/petitions') }}">Your Petitions</a></li>
+                        <li><a href="{{ url('/petition/create') }}">Create Petition</a></li>
                     </ul>
                 @endunless
 
