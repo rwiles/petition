@@ -72,7 +72,8 @@ class PetitionController extends Controller
         $petition = Petition::create([
             'title' => $request->title,
             'summary' => $request->summary,
-            'body' => $request->body
+            'body' => $request->body,
+            'private' => $request->private
         ]);
 
         return redirect('/petition/'.$petition->id);
@@ -107,16 +108,16 @@ class PetitionController extends Controller
      */
     public function edit($id)
     {
-      $petition = Petition::findOrFail($id);
+        $petition = Petition::findOrFail($id);
 
-      if (Auth::user() && $petition->user_id == Auth::user()->id) {
-          return view('petition.create', [
-              'petition' => $petition
-          ]);
-      }
-      else {
-          App::abort(404);
-      }
+        if (Auth::user() && $petition->user_id == Auth::user()->id) {
+            return view('petition.create', [
+                'petition' => $petition
+            ]);
+        }
+        else {
+            App::abort(404);
+        }
     }
 
     /**
@@ -128,21 +129,27 @@ class PetitionController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request, [
-          'title' => 'required',
-          'summary' => 'required',
-          'body' => 'required'
-      ]);
+        $this->validate($request, [
+            'title' => 'required',
+            'summary' => 'required',
+            'body' => 'required'
+        ]);
 
-      $petition = Petition::findOrFail($id);
+        $petition = Petition::findOrFail($id);
 
-      $petition->update([
-          'title' => $request->title,
-          'summary' => $request->summary,
-          'body' => $request->body
-      ]);
+        if (Auth::user() && $petition->user_id == Auth::user()->id) {
+            $petition->update([
+                'title' => $request->title,
+                'summary' => $request->summary,
+                'body' => $request->body,
+                'private' => (bool) $request->private
+            ]);
 
-      return redirect('/petition/'.$petition->id);
+            return redirect('/petition/'.$petition->id);
+        }
+        else {
+            App::abort(404);
+        }
     }
 
     /**
@@ -153,6 +160,15 @@ class PetitionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $petition = Petition::findOrFail($id);
+
+        if (Auth::user() && $petition->user_id == Auth::user()->id) {
+            $petition->delete();
+
+            return redirect(Auth::user()->id.'/petitions');
+        }
+        else {
+            App::abort(404);
+        }
     }
 }

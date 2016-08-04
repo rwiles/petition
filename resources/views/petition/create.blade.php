@@ -67,6 +67,13 @@
 														</div>
 												</div>
 
+                        <div class="form-group">
+														<label for="private" class="col-md-4 control-label">
+                                <input id="private" name="private" type="checkbox" {{ old('private', $petition->private) ? 'checked' : '' }} />
+                                Private
+                            </label>
+												</div>
+
 												<div class="form-group">
 														<div class="col-md-6 col-md-offset-4">
 																<button type="submit" class="btn btn-primary">
@@ -75,6 +82,25 @@
 														</div>
 												</div>
 										</form>
+
+                    @if ($petition->id)
+                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/petition/'.$petition->id) }}">
+                          @if ($petition->id)
+                              <input type="hidden" name="_method" value="DELETE">
+                          @endif
+
+                          {{ csrf_field() }}
+
+                          <div class="form-group">
+  														<div class="col-md-6 col-md-offset-4">
+  																<button type="submit" class="btn btn-sm btn-danger">
+  																		<i class="fa fa-btn fa-trash-o"></i> Delete Petition
+  																</button>
+  														</div>
+  												</div>
+  										</form>
+                    @endif
+
                 </div>
             </div>
         </div>
