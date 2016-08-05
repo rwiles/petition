@@ -46,4 +46,44 @@ class Petition extends Model
     {
         return $this->hasMany('App\Signature');
     }
+
+    /**
+     * Provide default title for thankyou page.
+     */
+    public function getThankyouTitleAttribute() {
+        if (isset($this->attributes['thankyou_title'])) {
+            return $this->attributes['thankyou_title'];
+        }
+        return "Thank You";
+    }
+
+    /**
+     * Provide default body for thankyou page.
+     */
+    public function getThankyouBodyAttribute() {
+        if (isset($this->attributes['thankyou_body'])) {
+            return $this->attributes['thankyou_body'];
+        }
+        return "<p>Thank you for signing this petition!</p>";
+    }
+
+    /**
+     * Provide default subject for confimation email.
+     */
+    public function getThankyouEmailSubjectAttribute() {
+        if (isset($this->attributes['thankyou_email_subject'])) {
+            return $this->attributes['thankyou_email_subject'];
+        }
+        return "Thank You";
+    }
+
+    /**
+     * Provide default body for confirmation email.
+     */
+    public function getThankyouEmailBodyAttribute() {
+        if (isset($this->attributes['thankyou_email_body'])) {
+            return $this->attributes['thankyou_email_body'];
+        }
+        return "Thank you for signing this petition!";
+    }
 }

@@ -10,6 +10,7 @@ use App\Petition;
 use App\Signature;
 use App\User;
 use Auth;
+use Mail;
 
 class PetitionController extends Controller
 {
@@ -207,6 +208,17 @@ class PetitionController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone
             ]);
+
+
+            $view = 'emails.thankyou';
+        		$data = [
+        			'body' => $petition->thankyou_email_body
+        		];
+
+		        Mail::send($view, $data, function ($m) use ($request, $petition) {
+                $m->to($request->email)->subject($petition->thankyou_email_subject);
+            });
+
 
             return view('petition.thankyou', [
                 'signature' => $signature,

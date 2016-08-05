@@ -13,24 +13,30 @@
 										</ul>
 								</div>
 
-								<div class="table-responsive">
-										<table class="table">
-												<thead>
-														<tr>
-																<th>Name</th>
-																<th>Email</th>
-																<th>Phone</th>
-														</tr>
-												</thead>
-		                    @foreach($petition->signatures as $signature)
-														<tr>
-																<td>{{ $signature->name }}</td>
-																<td>{{ $signature->email }}</td>
-																<td>{{ $signature->phone }}</td>
-		                        </tr>
-												@endforeach
-										</table>
-								</div>
+								@if ($petition->signatures->count())
+										<div class="table-responsive">
+												<table class="table">
+														<thead>
+																<tr>
+																		<th>Name</th>
+																		<th>Email</th>
+																		<th>Phone</th>
+																</tr>
+														</thead>
+				                    @foreach($petition->signatures as $signature)
+																<tr>
+																		<td>{{ $signature->name }}</td>
+																		<td>{{ $signature->email }}</td>
+																		<td>{{ $signature->phone }}</td>
+				                        </tr>
+														@endforeach
+												</table>
+										</div>
+								@else
+										<div class="panel-body">
+												<p>No one has signed this petition yet.</p>
+										</div>
+								@endif
         </div>
     </div>
 </div>
