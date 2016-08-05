@@ -16,4 +16,6 @@ Route::auth();
 Route::get('/', 'PetitionController@index');
 Route::get('{user}/petitions', 'PetitionController@userIndex');
 
+Route::post('petition/{id}/sign', 'PetitionController@sign');
+
 Route::resource('petition', 'PetitionController');

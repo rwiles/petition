@@ -7,17 +7,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Petitions</div>
 
-									<ul class="list-group">
-	                    @foreach($petitions as $petition)
-													<li class="list-group-item">
-                              <span class="badge">{{ count($petition->signatures) }}</span>
+								<ul class="list-group">
+                    @foreach($petitions as $petition)
+												<li class="list-group-item">
+                            <span class="badge">{{ count($petition->signatures) }}</span>
 
-                              <a href="{{ url('petition/'.$petition->id) }}">
-                                  {{ $petition->title }}
-                              </a>
-                          </li>
-											@endforeach
-									</ul>
+                            <a href="{{ url('petition/'.$petition->id) }}">
+                                {{ $petition->title }}
+                            </a>
+                        </li>
+										@endforeach
+								</ul>
             </div>
         </div>
     </div>

@@ -37,16 +37,18 @@
 
                     <hr />
 
-                    <h3 class="section-title">Sign the petition</h3>
+                    <div class="col-md-offset-3 col-md-9">
+                        <h3 class="section-title">Sign the petition</h3>
+                    </div>
 
                     <form class="form-horizontal" role="form" method="POST" action="{{  url('petition/'.$petition->id.'/sign') }}">
 												{{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-														<label for="name" class="col-md-4 control-label">Name</label>
+														<label for="name" class="col-md-3 control-label">Name</label>
 
 														<div class="col-md-6">
-																<input id="name" type="text" class="form-control" name="name" value="{{ old('title') }}">
+																<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
 
 																@if ($errors->has('name'))
 																		<span class="help-block">
@@ -57,7 +59,7 @@
 												</div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-														<label for="email" class="col-md-4 control-label">Email Address</label>
+														<label for="email" class="col-md-3 control-label">Email Address</label>
 
 														<div class="col-md-6">
 																<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -71,7 +73,7 @@
 												</div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-														<label for="phone" class="col-md-4 control-label">Phone Number</label>
+														<label for="phone" class="col-md-3 control-label">Phone Number</label>
 
 														<div class="col-md-6">
 																<input id="phone" type="phone" class="form-control" name="phone" value="{{ old('phone') }}">
@@ -85,7 +87,7 @@
 												</div>
 
                         <div class="form-group">
-														<div class="col-md-6 col-md-offset-4">
+														<div class="col-md-6 col-md-offset-3">
 																<button type="submit" class="btn btn-primary">
 																		<i class="fa fa-pencil fa-user"></i> Sign it!
 																</button>

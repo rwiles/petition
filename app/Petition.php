@@ -14,7 +14,8 @@ class Petition extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'summary', 'body', 'private'
+        'title', 'summary', 'body', 'private',
+        'thankyou_title', 'thankyou_body', 'thankyou_email_subject', 'thankyou_email_body'
     ];
 
     /**

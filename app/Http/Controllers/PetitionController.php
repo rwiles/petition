@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Petition;
+use App\Signature;
 use App\User;
 use Auth;
 
@@ -73,7 +74,12 @@ class PetitionController extends Controller
             'title' => $request->title,
             'summary' => $request->summary,
             'body' => $request->body,
-            'private' => $request->private
+            'private' => $request->private,
+
+            'thankyou_title' => $request->thankyou_title,
+            'thankyou_body' => $request->thankyou_body,
+            'thankyou_email_subject' => $request->thankyou_email_subject,
+            'thankyou_email_body' => $request->thankyou_email_body
         ]);
 
         return redirect('/petition/'.$petition->id);
@@ -96,7 +102,7 @@ class PetitionController extends Controller
             ]);
         }
         else {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -116,7 +122,7 @@ class PetitionController extends Controller
             ]);
         }
         else {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -142,13 +148,18 @@ class PetitionController extends Controller
                 'title' => $request->title,
                 'summary' => $request->summary,
                 'body' => $request->body,
-                'private' => (bool) $request->private
+                'private' => (bool) $request->private,
+
+                'thankyou_title' => $request->thankyou_title,
+                'thankyou_body' => $request->thankyou_body,
+                'thankyou_email_subject' => $request->thankyou_email_subject,
+                'thankyou_email_body' => $request->thankyou_email_body
             ]);
 
             return redirect('/petition/'.$petition->id);
         }
         else {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -168,7 +179,41 @@ class PetitionController extends Controller
             return redirect(Auth::user()->id.'/petitions');
         }
         else {
-            App::abort(404);
+            abort(404);
+        }
+    }
+
+
+    /**
+     * Post a signature on the specified petition.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sign(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required'
+        ]);
+
+        $petition = Petition::findOrFail($id);
+
+        if (!$petition->private || (Auth::user() && $petition->user_id == Auth::user()->id)) {
+            $signature = Signature::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone
+            ]);
+
+            return view('petition.thankyou', [
+                'signature' => $signature,
+                'petition' => $petition
+            ]);
+        }
+        else {
+            abort(404);
         }
     }
 }
