@@ -74,7 +74,7 @@ class PetitionController extends Controller
             'title' => $request->title,
             'summary' => $request->summary,
             'body' => $request->body,
-            'private' => $request->private,
+            'private' => (bool) $request->private,
 
             'thankyou_title' => $request->thankyou_title,
             'thankyou_body' => $request->thankyou_body,

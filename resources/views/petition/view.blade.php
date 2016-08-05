@@ -33,7 +33,7 @@
 
                     <hr />
 
-										<p>{{ $petition->body }}</p>
+										{!! $petition->body !!}
 
                     <hr />
 
@@ -89,7 +89,7 @@
                         <div class="form-group">
 														<div class="col-md-6 col-md-offset-3">
 																<button type="submit" class="btn btn-primary">
-																		<i class="fa fa-pencil fa-user"></i> Sign it!
+																		<i class="fa fa-btn fa-pencil"></i> Sign it!
 																</button>
 														</div>
 												</div>

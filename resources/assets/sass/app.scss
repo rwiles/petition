@@ -1,3 +1,11 @@
+body {
+		font-family: 'Lato';
+}
+
+.fa-btn {
+		margin-right: 6px;
+}
+
 .panel.panel-tabs {
 		.panel-heading {
 				padding: 5px 5px 0 5px;
@@ -16,6 +24,6 @@
 		font-style: italic;
 }
 
-.btn .fa {
-		padding-right: 5px;
+.youtube-embed-wrapper {
+		padding-top: 0 !important;
 }

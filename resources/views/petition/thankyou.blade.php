@@ -22,7 +22,7 @@
                 <div class="panel-body">
                     <h2 class="section-title">{{ $petition->thankyou_title }}</h2>
 
-										<p>{{ $petition->thankyou_body }}</p>
+										{!! $petition->thankyou_body !!}
                 </div>
             </div>
         </div>

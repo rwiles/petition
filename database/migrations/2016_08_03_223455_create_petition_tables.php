@@ -17,12 +17,12 @@ class CreatePetitionTables extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('summary');
-            $table->string('body');
+            $table->longtext('body');
             $table->boolean('private');
             $table->string('thankyou_title');
-            $table->string('thankyou_body');
+            $table->longtext('thankyou_body');
             $table->string('thankyou_email_subject');
-            $table->string('thankyou_email_body');
+            $table->longtext('thankyou_email_body');
             $table->string('thankyou_sms');
             $table->timestamps();
         });

@@ -120,7 +120,7 @@
 														<label for="thankyou_email_body" class="col-md-2 control-label">Body</label>
 
                             <div class="col-md-8">
-                                <textarea id="thankyou_email_body" name="thankyou_email_body" class="form-control">{{ old('thankyou_email_body', $petition->thankyou_email_body) }}</textarea>
+                                <textarea id="thankyou_email_body" name="thankyou_email_body" class="form-control" rows="10">{{ old('thankyou_email_body', $petition->thankyou_email_body) }}</textarea>
                             </div>
 												</div>
 
@@ -151,6 +151,21 @@
   												</div>
   										</form>
                     @endif
+
+                    <script>
+                        CKEDITOR.replace('body', {
+                            filebrowserImageBrowseUrl: '{{ url('laravel-filemanager?type=Images') }}',
+                            filebrowserImageUploadUrl: '{{ url('laravel-filemanager/upload?type=Images&_token='.csrf_token()) }}',
+                            filebrowserBrowseUrl: '{{ url('laravel-filemanager?type=Files') }}',
+                            filebrowserUploadUrl: '{{ url('laravel-filemanager/upload?type=Files&_token='.csrf_token()) }}'
+                        });
+                        CKEDITOR.replace('thankyou_body', {
+                            filebrowserImageBrowseUrl: '{{ url('laravel-filemanager?type=Images') }}',
+                            filebrowserImageUploadUrl: '{{ url('laravel-filemanager/upload?type=Images&_token='.csrf_token()) }}',
+                            filebrowserBrowseUrl: '{{ url('laravel-filemanager?type=Files') }}',
+                            filebrowserUploadUrl: '{{ url('laravel-filemanager/upload?type=Files&_token='.csrf_token()) }}'
+                        });
+                    </script>
 
                 </div>
             </div>
