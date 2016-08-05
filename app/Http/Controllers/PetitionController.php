@@ -202,6 +202,7 @@ class PetitionController extends Controller
 
         if (!$petition->private || (Auth::user() && $petition->user_id == Auth::user()->id)) {
             $signature = Signature::create([
+                'petition_id' => $petition->id,
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone
@@ -209,6 +210,26 @@ class PetitionController extends Controller
 
             return view('petition.thankyou', [
                 'signature' => $signature,
+                'petition' => $petition
+            ]);
+        }
+        else {
+            abort(404);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified petition.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function signatures($id)
+    {
+        $petition = Petition::findOrFail($id);
+
+        if (Auth::user() && $petition->user_id == Auth::user()->id) {
+            return view('petition.signatures', [
                 'petition' => $petition
             ]);
         }

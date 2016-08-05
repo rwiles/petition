@@ -12,7 +12,7 @@ class Signature extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone'
+        'petition_id', 'name', 'email', 'phone'
     ];
 
     /**
